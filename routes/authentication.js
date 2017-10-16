@@ -1,5 +1,31 @@
 const User = require('../models/user');
 
+
+let userCheck = (req, res) => {
+    User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+        if (err) {
+            res.json({ success: false, message: err })
+        } else {
+            if (!user) {
+                res.send("No user found with this username");
+            }
+            else {
+                passwordCheck(req, res, user);
+            }
+        }
+    });
+}
+
+let passwordCheck = (req, res, user) => {
+    const validPassword = user.comparePassword(req.body.password);
+    if (!validPassword) {
+        res.json({ success: false, message: "password is invalid" });
+    } else {
+        res.json({ success: true, message: "login successfull!" });
+    }
+}
+
+
 module.exports = (router) => {
     router.post('/register', (req, res) => {
         if (!req.body.email) {
@@ -45,6 +71,16 @@ module.exports = (router) => {
                 }
             }
         }
+    });
+    router.post('/login', (req, res) => {
+        if (!req.body.username) {
+            res.json({ success: false, message: "No username provided" });
+        } else if (!req.body.password) {
+            res.json({ success: false, message: "No password provided!" });
+        } else {
+            userCheck(req, res);
+        }
+
     });
     return router;
 }
