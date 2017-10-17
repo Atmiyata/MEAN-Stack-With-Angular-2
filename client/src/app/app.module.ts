@@ -9,7 +9,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import {RegisterService} from './services/register.service';
-
+import { LoginComponent } from './components/login/login.component';
+import {LoginService} from "./services/login.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {RegisterService} from './services/register.service';
     NavbarComponent,
     HomeComponent,
     DashboardComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,7 @@ import {RegisterService} from './services/register.service';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [RegisterService],
+  providers: [RegisterService,LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
