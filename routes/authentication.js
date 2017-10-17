@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const config = require('../config/database');
 
 
 let userCheck = (req, res) => {
@@ -21,7 +23,8 @@ let passwordCheck = (req, res, user) => {
     if (!validPassword) {
         res.json({ success: false, message: "password is invalid" });
     } else {
-        res.json({ success: true, message: "login successfull!" });
+        const token = jwt.sign({userId:user._id},config.secret,{expiresIn:'24h'});
+        res.json({ success: true, message: "login successfull!",token:token,user:{username:user.username}});
     }
 }
 

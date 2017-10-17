@@ -27,18 +27,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  createForm() {
+  public createForm() {
     this.form = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
 
-  submitForm() {
+  public submitForm() {
     this.userLogin.username = this.user.username;
     this.userLogin.password = this.user.password;
     this.loginUser();
-  }
+    }
 
   private loginUser() {
     this.loginService.loginUser(this.userLogin).subscribe(res => {
@@ -47,6 +47,9 @@ export class LoginComponent implements OnInit {
         this.messageClass = "alert alert-danger";
       } else {
         this.messageClass = "alert alert-success";
+        setTimeout(()=>{
+        console.log(res);   
+        },3000)
       }
     });
   }
