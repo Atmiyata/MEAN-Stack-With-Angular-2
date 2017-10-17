@@ -7,7 +7,7 @@ let userCheck = (req, res) => {
             res.json({ success: false, message: err })
         } else {
             if (!user) {
-                res.send("No user found with this username");
+                res.json({ success: false, message: "No user found with this username" });
             }
             else {
                 passwordCheck(req, res, user);

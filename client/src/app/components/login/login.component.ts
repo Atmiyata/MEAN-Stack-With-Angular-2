@@ -41,8 +41,13 @@ export class LoginComponent implements OnInit {
   }
 
   private loginUser() {
-    this.loginService.loginUser(this.userLogin).subscribe(data => {
-      console.log(data);
+    this.loginService.loginUser(this.userLogin).subscribe(res => {
+      this.message = res.message;
+      if (!res.success) {
+        this.messageClass = "alert alert-danger";
+      } else {
+        this.messageClass = "alert alert-success";
+      }
     });
   }
 }
