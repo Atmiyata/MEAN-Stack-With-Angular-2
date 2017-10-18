@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
-
-
+import {Router} from '@angular/router';
+import {AuthGuard} from '../../guards/auth.guard';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,17 +14,26 @@ export class LoginComponent implements OnInit {
   public message;
   public messageClass;
   public user: any = [];
-
+  public previousUrl;
   private userLogin = {
     "username": '',
     "password": ''
   };
-  constructor(private formBuilder: FormBuilder,
-    private loginService: LoginService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: LoginService,
+    private router:Router,
+    private authGuard:AuthGuard) {
     this.createForm();
   }
 
   ngOnInit() {
+    if(this.authGuard.redirectUrl){
+      this.messageClass = 'alert alert-danger';
+      this.message= "Please Login First";
+      this.previousUrl = this.authGuard.redirectUrl;
+      this.authGuard.redirectUrl = undefined;
+    }
   }
 
   public createForm() {
@@ -38,6 +47,7 @@ export class LoginComponent implements OnInit {
     this.userLogin.username = this.user.username;
     this.userLogin.password = this.user.password;
     this.loginUser();
+   
     }
 
   private loginUser() {
@@ -47,10 +57,15 @@ export class LoginComponent implements OnInit {
         this.messageClass = "alert alert-danger";
       } else {
         this.messageClass = "alert alert-success";
-        setTimeout(()=>{
-        console.log(res);   
-        },3000)
-      }
+         this.loginService.storeUserData(res.token,res.user);
+         setTimeout(()=>{
+           if(this.previousUrl){
+             this.router.navigate([this.previousUrl]);
+           }else{
+            this.router.navigate(['/dashboard']);
+           }
+          },2000);  
+        }
     });
   }
 }

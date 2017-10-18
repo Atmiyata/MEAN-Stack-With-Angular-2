@@ -1,22 +1,37 @@
-   <!-- Fixed navbar -->
-   <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-   
-        <a class="navbar-brand" routerLink="/home">Bootstrap theme</a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-left">
-          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/home">Home</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li  [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/dashboard">Dashboard</a></li>
-          <li><a>Profile</a></li>
-          <li><a>Blog</a></li>
-          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/login">Login</a></li>
-          <li><a>Logout</a></li>
-          <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"><a routerLink="/register">Register</a></li>
-        </ul>
-      </div><!--/.nav-collapse -->
+<!-- Fixed navbar -->
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+
+      <a class="navbar-brand" routerLink="/">MEAN STACK</a>
     </div>
-  </nav>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink="/home">Home</a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li *ngIf="loginService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink="/dashboard">Dashboard</a>
+        </li>
+        <li *ngIf="loginService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink="/profile">Profile</a>
+        </li>
+        <li *ngIf="loginService.loggedIn()">
+          <a>Blog</a>
+        </li>
+        <li *ngIf="!loginService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink="/login">Login</a>
+        </li>
+        <li *ngIf="loginService.loggedIn()">
+          <a (click)="logout();">Logout</a>
+        </li>
+        <li *ngIf="!loginService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a routerLink="/register">Register</a>
+        </li>
+      </ul>
+    </div>
+    <!--/.nav-collapse -->
+  </div>
+</nav>

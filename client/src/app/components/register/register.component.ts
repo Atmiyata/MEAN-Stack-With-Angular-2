@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../services/register.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private registerService: RegisterService) {
+    private registerService: RegisterService,
+     private router:Router) {
     this.createForm();
   }
 
@@ -83,6 +85,7 @@ export class RegisterComponent implements OnInit {
           this.messageClass = "alert alert-danger";
         } else {
           this.messageClass = "alert alert-success";
+          this.router.navigate(['/login']);
         }
 
       });
