@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegisterService } from '../../services/register.service';
 import {Router} from '@angular/router';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-register',
@@ -23,10 +24,26 @@ export class RegisterComponent implements OnInit {
     password: ''
   };
 
+  profileInfo = {
+    username: '',
+    name:'',
+    dob:'',
+    gender:'',
+    primaryOccupations:'',
+    secondaryOccupation: '',
+    skills: [],
+    phone: '',
+    email:'',
+    languageKnown:[],
+    workExperience: '',
+    overview:''
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private registerService: RegisterService,
-     private router:Router) {
+    private profileService:ProfileService,
+    private router:Router) {
     this.createForm();
   }
 
@@ -84,6 +101,7 @@ export class RegisterComponent implements OnInit {
         if (!res.success) {
           this.messageClass = "alert alert-danger";
         } else {
+          this.createprofile();
           this.messageClass = "alert alert-success";
           this.router.navigate(['/login']);
         }
@@ -91,4 +109,13 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+   
+  private createprofile() {
+   /*  this.registerUser.username = this.profileInfo.username;
+    this.profileService.createProfile(this.profileInfo).subscribe(data =>{
+      console.log(data);
+    }) */
+
+  }
+
 }

@@ -43,7 +43,7 @@ module.exports = (router) => {
                     let user = new User({
                         email: req.body.email.toLowerCase(),
                         username: req.body.username.toLowerCase(),
-                        password: req.body.password
+                        password: req.body.password,
                     });
 
                     user.save((err) => {
@@ -75,6 +75,9 @@ module.exports = (router) => {
             }
         }
     });
+
+    
+
     router.post('/login', (req, res) => {
         if (!req.body.username) {
             res.json({ success: false, message: "No username provided" });
@@ -85,6 +88,7 @@ module.exports = (router) => {
         }
 
     });
+
     router.use((req, res, next) => {
         const token = req.headers['authorization'];
         if (!token) {
@@ -101,7 +105,7 @@ module.exports = (router) => {
         }
     });
 
-    router.get('/profile', (req, res) => {
+   /* router.get('/profile', (req, res) => {
         User.findOne({ _id: req.decoded.userId }).select('username email').exec((err, user) => {
             if (err) {
                 res.json({ success: false, message: err });
@@ -113,6 +117,7 @@ module.exports = (router) => {
                 }
             }
         });
-    })
+    });
+    */
     return router;
 }

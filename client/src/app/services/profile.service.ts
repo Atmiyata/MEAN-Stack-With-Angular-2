@@ -29,9 +29,13 @@ export class ProfileService {
 
   }
 
-  public getProfile() {
+  public getProfile(username) {
     this.createAuthenticationHeader();
-    return this.http.get(this.domain + '/authentication/profile', this.option).map(res => res.json());
+    return this.http.post(this.domain + '/profile/get-info', username, this.option).map(res => res.json());
   }
-
+  
+  public createProfile(profileInfo) {
+    this.createAuthenticationHeader();
+     return this.http.post(this.domain + '/profile/create-info', profileInfo,this.option).map(res => res.json());
+  }
 }

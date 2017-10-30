@@ -9,10 +9,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RegisterService } from './services/register.service';
-import { LoginComponent } from './components/login/login.component';
-import { LoginService } from "./services/login.service";
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileService } from './services/profile.service';
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from "./services/login.service";
+
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/notAuth.guard';

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 import {Router} from '@angular/router';
 import {AuthGuard} from '../../guards/auth.guard';
+import { ProfileService } from '../../services/profile.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -19,6 +20,9 @@ export class LoginComponent implements OnInit {
     "username": '',
     "password": ''
   };
+  public username:any;
+
+
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,

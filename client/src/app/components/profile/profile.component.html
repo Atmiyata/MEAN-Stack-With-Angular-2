@@ -1,8 +1,184 @@
-<h1 class="page-header">Profile page</h1>
+<div>
+  <div class="row">
+    <div class="col-md-10 ">
+      <form [formGroup]="form" (submit)="updateProfile()" class="form-horizontal">
+        <fieldset>
 
-<ul class="list-group">
-  <li class="list-group-item">
-    <b>Username :</b> {{username}} </li>
-  <li class="list-group-item">
-    <b>Email :</b> {{email}}</li>
-</ul>
+          <!-- Form Name -->
+          <legend>Edit Your Profile.</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="name">Name (Full name)</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-user"></i>
+                </div>
+                <input type="text" class="form-control" name="name" placeholder="Full Name" formControlName="name" [(ngModel)]="user.name">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="dob">Date Of Birth</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </div>
+                <input name="dob" type="text" placeholder="Date Of Birth  MM/DD/YYYY" class="form-control" formControlName="dob" [(ngModel)]="user.dob">
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Multiple Radios (inline) -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="gender">Gender</label>
+            <div class="col-md-4">
+              <label class="radio-inline" for="gender-0">
+                <input type="radio" name="gender" formControlName="gender" [value]="0" [checked]="user.gender==0" [(ngModel)]="user.gender"> Male
+              </label>
+              <label class="radio-inline" for="gender-1">
+                <input type="radio" name="gender" formControlName="gender" [value]="1" [checked]="user.gender==1" [(ngModel)]="user.gender"> Female
+              </label>
+              <label class="radio-inline" for="gender-2">
+                <input type="radio" name="gender" formControlName="gender" [value]="2" [checked]="user.gender==2" [(ngModel)]="user.gender"> Other
+              </label>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="primaryOccupation">Primary Occupation</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-briefcase"></i>
+                </div>
+                <input name="primaryOccupation" formControlName="primaryOccupation" type="text" placeholder="Primary Occupation" class="form-control"
+                  [(ngModel)]="user.primaryOccupation">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="secondaryOccupation">Secondary Occupation (if any)</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-briefcase"></i>
+                </div>
+                <input name="secondaryOccupation" type="text" formControlName="secondaryOccupation" placeholder="Secondary Occupation (if any)"
+                  class="form-control" [(ngModel)]="user.secondaryOccupation">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="Skill">Skills</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon btn-primary">
+                  <i class="glyphicon" (click)="addSkill();">
+                    <strong>Add</strong>
+                  </i>
+                </div>
+                <input name="skill" type="text" placeholder="Skills" formControlName="skill" class="form-control" [(ngModel)]="user.skill">
+              </div>
+              <ul>
+                <li *ngFor="let sk of skills">{{sk}}</li>
+              </ul>
+            </div>
+          </div>
+
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="phone">Phone number </label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="glyphicon glyphicon-phone"></i>
+                </div>
+                <input name="phone" type="text" formControlName="phone" placeholder="Primary Phone number " class="form-control" [(ngModel)]="user.phone">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="email">Email Address</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  <i class="	glyphicon glyphicon-envelope"></i>
+                </div>
+                <input type="email" placeholder="Email Address" class="form-control" name="email" formControlName="email" [(ngModel)]="user.email">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="languageKnown">Languages Known</label>
+            <div class="col-md-4">
+              <div class="input-group ">
+                <div class="input-group-addon btn-primary">
+                  <i class="glyphicon" (click)="addLanguage();">
+                    <strong>Add</strong>
+                  </i>
+                </div>
+                <input type="text" placeholder="Add Languages" class="form-control" name="languageKnown" formControlName="languageKnown"
+                  [(ngModel)]="user.languageKnown">
+              </div>
+              <div>
+                <ul>
+                  <li *ngFor="let ln of languages">{{ln}}</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="workExperience">Working Experience (time period)</label>
+            <div class="col-md-4">
+              <div class="input-group">
+                <input name="workExperience" type="text" placeholder="Enter time period " class="form-control" formControlName="workExperience"
+                  [(ngModel)]="user.workExperience">
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Textarea -->
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="overview">Overview (max 200 words)</label>
+            <div class="col-md-4">
+              <textarea class="form-control" rows="10" name="overview" [(ngModel)]="user.overview" formControlName="overview">Overview</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label"></label>
+            <div class="col-md-4">
+              <button class="btn btn-primary btn-lg" [(disabled)]="!form.valid" type="submit">Submit</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="col-md-2 hidden-xs">
+      <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
+      <div class="form-group">
+        <label class=" control-label" for="Upload photo">Upload photo</label>
+        <div>
+          <input id="Upload photo" name="Upload photo" class="input-file" type="file">
+        </div>
+      </div>
+    </div>
+  </div>
