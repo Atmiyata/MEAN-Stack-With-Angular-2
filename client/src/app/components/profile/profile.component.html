@@ -13,7 +13,7 @@
             <div class="col-md-4">
               <div class="input-group">
                 <div class="input-group-addon">
-                  <i class="glyphicon glyphicon-user"></i>
+                  <i class="glyphicon glyphicon-user"></i>  
                 </div>
                 <input type="text" class="form-control" name="name" placeholder="Full Name" formControlName="name" [(ngModel)]="user.name">
               </div>
@@ -38,13 +38,16 @@
             <label class="col-md-4 control-label" for="gender">Gender</label>
             <div class="col-md-4">
               <label class="radio-inline" for="gender-0">
-                <input type="radio" name="gender" formControlName="gender" [value]="0" [checked]="user.gender==0" [(ngModel)]="user.gender"> Male
+                <input type="radio" name="gender" formControlName="gender" [value]="0" [checked]="user.gender==0" 
+                [(ngModel)]="user.gender"> Male
               </label>
               <label class="radio-inline" for="gender-1">
-                <input type="radio" name="gender" formControlName="gender" [value]="1" [checked]="user.gender==1" [(ngModel)]="user.gender"> Female
+                <input type="radio" name="gender" formControlName="gender" [value]="1" [checked]="user.gender==1" 
+                [(ngModel)]="user.gender"> Female
               </label>
               <label class="radio-inline" for="gender-2">
-                <input type="radio" name="gender" formControlName="gender" [value]="2" [checked]="user.gender==2" [(ngModel)]="user.gender"> Other
+                <input type="radio" name="gender" formControlName="gender" [value]="2" [checked]="user.gender==2"
+                  [(ngModel)]="user.gender"> Other
               </label>
             </div>
           </div>
@@ -83,14 +86,13 @@
             <div class="col-md-4">
               <div class="input-group">
                 <div class="input-group-addon btn-primary">
-                  <i class="glyphicon" (click)="addSkill();">
-                    <strong>Add</strong>
-                  </i>
+                  <i class="glyphicon" (click)="addSkill();" class="add-btn"><strong>Add</strong></i>
                 </div>
-                <input name="skill" type="text" placeholder="Skills" formControlName="skill" class="form-control" [(ngModel)]="user.skill">
+                <input name="skill" type="text" placeholder="Skills" 
+                formControlName="skill" class="form-control" [(ngModel)]="user.skill">
               </div>
               <ul>
-                <li *ngFor="let sk of skills">{{sk}}</li>
+                <li *ngFor="let sk of skills">{{sk}}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" (click)="removeSkill(sk);"></span></li>
               </ul>
             </div>
           </div>
@@ -128,7 +130,7 @@
             <div class="col-md-4">
               <div class="input-group ">
                 <div class="input-group-addon btn-primary">
-                  <i class="glyphicon" (click)="addLanguage();">
+                  <i class="glyphicon" (click) = "addLanguage();"class="add-btn">
                     <strong>Add</strong>
                   </i>
                 </div>
@@ -137,7 +139,7 @@
               </div>
               <div>
                 <ul>
-                  <li *ngFor="let ln of languages">{{ln}}</li>
+                  <li *ngFor="let ln of languages">{{ln}}&nbsp;&nbsp;<span class="glyphicon glyphicon-remove" (click)="removeLanguage(ln);"></span></li>
                 </ul>
               </div>
 
@@ -170,7 +172,8 @@
             </div>
           </div>
         </fieldset>
-      </form>
+      </form>+
+
     </div>
     <div class="col-md-2 hidden-xs">
       <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">

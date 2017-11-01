@@ -43,5 +43,21 @@ module.exports = (router) => {
         }); 
     });
 
+
+    
+    router.put('/edit-info/',(req,res)=> {
+       UserInfo.findOneAndUpdate({username:req.body.username},req.body,{new:true},(err,userInfo)=>{
+        if (err) {
+            res.json({ success: false, message: err });
+        } else {
+            if (!userInfo) {
+                res.json({ success: false, message: "user not found" });
+            } else {
+                res.json({ success: true, message:"user saved successfully!"});
+            }
+        }
+       })
+    });
+
     return router;
 };

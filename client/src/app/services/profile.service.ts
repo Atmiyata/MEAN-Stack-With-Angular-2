@@ -29,13 +29,19 @@ export class ProfileService {
 
   }
 
-  public getProfile(username) {
+  getProfile(username) {
     this.createAuthenticationHeader();
     return this.http.post(this.domain + '/profile/get-info', username, this.option).map(res => res.json());
   }
-  
-  public createProfile(profileInfo) {
+
+  createProfile(profileInfo) {
     this.createAuthenticationHeader();
-     return this.http.post(this.domain + '/profile/create-info', profileInfo,this.option).map(res => res.json());
+    return this.http.post(this.domain + '/profile/create-info', profileInfo, this.option).map(res => res.json());
   }
+
+  editProfile(profileInfo) {
+    this.createAuthenticationHeader();
+    return this.http.put(this.domain + '/profile/edit-info', profileInfo, this.option).map(res => res.json());
+  }
+
 }
